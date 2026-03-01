@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ task.title }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>{{ task.title }}</h1>
+    <p><strong>Status:</strong> {% if task.completed %}✅ Completed{% else %}⏳ Pending{% endif %}</p>
+    <p><strong>Priority:</strong> {{ task.get_priority_display }}</p>
+    {% if task.category %}<p><strong>Category:</strong> {{ task.category }}</p>{% endif %}
+    {% if task.due_date %}<p><strong>Due Date:</strong> {{ task.due_date }}</p>{% endif %}
+    {% if task.description %}<p style="margin-top:1rem;">{{ task.description }}</p>{% endif %}
+    {% if task.tags.all %}
+        <p><strong>Tags:</strong>
+            {% for tag in task.tags.all %}
+                <span style="background:#eee; padding:2px 6px; border-radius:3px;">{{ tag.name }}</span>
+            {% endfor %}
+        </p>
+    {% endif %}
+    <p style="color:#999; font-size:0.85rem; margin-top:1rem;">Created: {{ task.created_at }}</p>
+    <div style="margin-top: 1rem;">
+        <a href="{% url 'task-update' task.pk %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'task-delete' task.pk %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'task-list' %}" class="btn btn-primary">Back to List</a>
+    </div>
+</div>
+{% endblock %}

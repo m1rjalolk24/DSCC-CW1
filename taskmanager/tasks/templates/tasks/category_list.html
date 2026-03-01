@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<h1>My Categories</h1>
+
+<div class="card">
+    <h3>Add New Category</h3>
+    <form method="post" style="display: flex; gap: 0.5rem;">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Category name" required style="flex:1; padding:0.5rem; border:1px solid #ddd; border-radius:4px;">
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+</div>
+
+{% for category in categories %}
+    <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
+        <span>{{ category.name }} ({{ category.tasks.count }} tasks)</span>
+        <a href="{% url 'category-delete' category.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+{% empty %}
+    <div class="card"><p>No categories yet.</p></div>
+{% endfor %}
+{% endblock %}

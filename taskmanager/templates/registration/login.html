@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 2rem auto;">
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        {% if form.errors %}
+            <p style="color: red;">Invalid username or password.</p>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <p style="margin-top:1rem;">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+</div>
+{% endblock %}

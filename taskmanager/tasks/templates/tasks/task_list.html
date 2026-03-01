@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}My Tasks{% endblock %}
+
+{% block content %}
+<h1>My Tasks</h1>
+
+<div style="margin-bottom: 1rem; display: flex; gap: 0.5rem;">
+    <a href="{% url 'task-create' %}" class="btn btn-primary">+ New Task</a>
+    <a href="{% url 'category-list' %}" class="btn btn-warning">Manage Categories</a>
+</div>
+
+{% if tasks %}
+    {% for task in tasks %}
+        <div class="card priority-{{ task.priority }} {% if task.completed %}task-completed{% endif %}">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3>{{ task.title }}</h3>
+                    <p style="color: #666; font-size: 0.9rem;">
+                        Priority: {{ task.get_priority_display }} |
+                        {% if task.category %}Category: {{ task.category }}{% endif %}
+                        {% if task.due_date %}| Due: {{ task.due_date }}{% endif %}
+                    </p>
+                    {% if task.tags.all %}
+                        <p style="font-size: 0.85rem;">
+                            Tags: {% for tag in task.tags.all %}<span style="background:#eee; padding:2px 6px; border-radius:3px; margin-right:4px;">{{ tag.name }}</span>{% endfor %}
+                        </p>
+                    {% endif %}
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="{% url 'task-detail' task.pk %}" class="btn btn-primary">View</a>
+                    <a href="{% url 'task-update' task.pk %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'task-delete' task.pk %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <p>No tasks yet. Create your first task!</p>
+    </div>
+{% endif %}
+{% endblock %}
