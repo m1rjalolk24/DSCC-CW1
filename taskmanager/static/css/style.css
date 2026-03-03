@@ -29,6 +29,21 @@ body {
     color: #3498db;
 }
 
+.logout-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: inherit;
+    font-family: inherit;
+    margin-left: 1rem;
+    padding: 0;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    color: #3498db;
+}
+
 .container {
     max-width: 900px;
     margin: 2rem auto;

@@ -15,7 +15,10 @@
                 <a href="{% url 'task-list' %}">My Tasks</a>
                 <a href="{% url 'category-list' %}">Categories</a>
                 <a href="{% url 'task-create' %}">+ New Task</a>
-                <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+                <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Logout ({{ user.username }})</button>
+                </form>
             {% else %}
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register' %}">Register</a>
