@@ -77,7 +77,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /opt/taskmanager
+            cd /opt/taskmanager/taskmanager
+            git pull origin main
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker compose pull web
             docker compose up -d --no-deps web nginx

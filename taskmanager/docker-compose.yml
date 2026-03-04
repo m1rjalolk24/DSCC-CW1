@@ -18,6 +18,7 @@ services:
 
   web:
     build: .
+    image: m1rjalolk/taskmanager:latest
     command: >
       sh -c "python manage.py migrate --noinput &&
              python manage.py collectstatic --noinput &&
@@ -36,10 +37,12 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_files:/app/staticfiles
       - media_files:/app/media
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - web
     restart: unless-stopped
