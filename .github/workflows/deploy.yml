@@ -80,11 +80,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            git config --global --add safe.directory /opt/taskmanager
-            git config --global --add safe.directory /opt/taskmanager/taskmanager
-            cd /opt/taskmanager/taskmanager
-            git pull origin main
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker pull ${{ env.IMAGE_NAME }}:latest
+            cd /opt/taskmanager/taskmanager
             docker compose up -d --no-deps web nginx
             docker image prune -f
