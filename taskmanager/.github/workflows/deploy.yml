@@ -79,7 +79,7 @@ jobs:
           script: |
             git config --global --add safe.directory /opt/taskmanager
             git config --global --add safe.directory /opt/taskmanager/taskmanager
-            cd /opt/taskmanager/taskmanager
+            cd /opt/taskmanager/taskmanager/taskmanager
             git pull origin main
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker pull ${{ env.IMAGE_NAME }}:latest
