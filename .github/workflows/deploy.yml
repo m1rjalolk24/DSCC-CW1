@@ -82,6 +82,6 @@ jobs:
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker pull ${{ env.IMAGE_NAME }}:latest
-            cd /opt/taskmanager/taskmanager
+            cd /opt/taskmanager/taskmanager/taskmanager
             docker compose up -d --force-recreate --no-deps web nginx
             docker image prune -f
