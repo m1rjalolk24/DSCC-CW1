@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="{% url 'task-list' %}" style="font-size: 1.2rem; font-weight: bold;">📋 TaskManager</a>
+        <a href="{% url 'task-list' %}" style="font-size: 1.2rem; font-weight: bold;">TaskManager</a>
         <div>
             {% if user.is_authenticated %}
                 <a href="{% url 'task-list' %}">My Tasks</a>
